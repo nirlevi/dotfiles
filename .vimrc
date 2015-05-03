@@ -36,8 +36,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'benmills/vim-golang-alternate'
-Plugin 'fatih/vim-go'
+Plugin 'bling/vim-airline'
 
 " Language bundles
 Plugin 'cakebaker/scss-syntax.vim'
@@ -330,31 +329,53 @@ colorscheme jellybeans
 set t_Co=256
 nnoremap <leader><leader> <C-^>
 
+" ctrlp.vim
+" ---------------
+" Ensure Ctrl-P isn't bound by default
+let g:ctrlp_map = ''
 
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+" Ensure max height isn't too large. (for performance)
+let g:ctrlp_max_height = 10
+" Fix fix new windows opening in split from startify
+let g:ctrlp_reuse_window = 'startify'
+let g:ctrlp_mruf_max = 350
+let g:ctrlp_mruf_default_order = 0
+
+" Leader Commands
+nnoremap <leader>t :CtrlPRoot<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>u :CtrlPCurFile<CR>
+nnoremap <leader>m :CtrlPMRUFiles<CR>
+
+if executable('ack')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  " HatTip: http://robots.thoughtbot.com/faster-grepping-in-vim and
+  " @ethanmuller
+  let g:ctrlp_user_command = 'ack %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" ---------------
+" airline
+" ---------------
+let g:airline_theme = 'jellybeans'
+let g:airline_powerline_fonts = 1
+let g:airline_detect_modified = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#hunks#enabled = 0
+" Show the current working directory folder name
+let g:airline_section_b = '%{substitute(getcwd(), ".*\/", "", "g")} '
+" Just show the file name
+let g:airline_section_c = '%t'
+let g:airline_section_y = ''
+let g:airline_section_z = '%3p%% %#__accent_bold#%4l%#__restore__#:%3'
+let g:airline_section_z = '%3p%% %{substitute(line("."), "\\v(\\d)((\\d\\d\\d)+\\d@!)@=", "\\1,", "g")}|%{substitute(line("$"), "\\v(\\d)((\\d\\d\\d)+\\d@!)@=", "\\1,", "g")}'
+
+" ---------------
+" jellybeans.vim colorscheme tweaks
+" ---------------
+" Make cssAttrs (center, block, etc.) the same color as units
+hi! link cssAttr Constant
+set tags+=gems.tags
