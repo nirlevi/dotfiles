@@ -9,6 +9,8 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugin dependencies
+Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'hsanson/vim-android'
 Plugin 'kana/vim-textobj-user'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 
@@ -379,3 +381,5 @@ let g:airline_section_z = '%3p%% %{substitute(line("."), "\\v(\\d)((\\d\\d\\d)+\
 " Make cssAttrs (center, block, etc.) the same color as units
 hi! link cssAttr Constant
 set tags+=gems.tags
+
+
