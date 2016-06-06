@@ -319,7 +319,6 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
 
  
-set tags=./tags;/,~/.vimtags
 
 " Make tags placed in .git/tags file available in all levels of a repository
 let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
@@ -380,6 +379,12 @@ let g:airline_section_z = '%3p%% %{substitute(line("."), "\\v(\\d)((\\d\\d\\d)+\
 " ---------------
 " Make cssAttrs (center, block, etc.) the same color as units
 hi! link cssAttr Constant
-set tags+=gems.tags
+set tags=tmp/tags
+set tags+=tmp/gems.tags
 
+
+
+
+
+let g:syntastic_ruby_exec = 'ruby'
 
