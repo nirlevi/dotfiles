@@ -13,6 +13,7 @@ Plugin 'artur-shaik/vim-javacomplete2'
 Plugin 'hsanson/vim-android'
 Plugin 'kana/vim-textobj-user'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'will133/vim-dirdiff'
 
 " Plugins with dependencies
 Plugin 'garbas/vim-snipmate'
@@ -387,4 +388,6 @@ set tags+=tmp/gems.tags
 
 
 let g:syntastic_ruby_exec = 'ruby'
+
+let g:DirDiffExcludes = "CVS,*.class,*.exe,.*.swp,.git*"
 
