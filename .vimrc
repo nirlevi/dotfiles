@@ -10,7 +10,6 @@ Plugin 'gmarik/Vundle.vim'
 
 " Plugin dependencies
 Plugin 'artur-shaik/vim-javacomplete2'
-Plugin 'hsanson/vim-android'
 Plugin 'kana/vim-textobj-user'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'will133/vim-dirdiff'
@@ -39,7 +38,8 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'itchyny/lightline.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Language bundles
 Plugin 'cakebaker/scss-syntax.vim'
@@ -327,7 +327,12 @@ if gitroot != ''
     let &tags = &tags . ',' . gitroot . '/.git/tags'
 endif
 
-colorscheme jellybeans
+
+if filereadable( expand("$HOME/.vim/bundle/jellybeans.vim/colors/jellybeans.vim") )
+    colorscheme jellybeans
+endif
+
+
 set t_Co=256
 nnoremap <leader><leader> <C-^>
 
